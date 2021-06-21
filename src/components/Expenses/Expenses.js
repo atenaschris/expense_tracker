@@ -1,9 +1,9 @@
-import "./NewExpensesComponent.css";
+import "./Expenses.css";
 import ExpenseItem from "./ExpenseItem";
 import Card from "../ui/Card";
 
 
-const  NewExpensesComponent =(props) => {
+const  Expenses =(props) => {
   return (
     <Card className="expenses">
       {props.data.map((expense) => (
@@ -34,4 +34,4 @@ const  NewExpensesComponent =(props) => {
   );
 }
 
-export default NewExpensesComponent;
+export default Expenses;
