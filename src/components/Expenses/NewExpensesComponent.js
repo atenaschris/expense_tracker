@@ -3,7 +3,7 @@ import ExpenseItem from "./ExpenseItem";
 import Card from "../ui/Card";
 
 
-function NewExpensesComponent(props) {
+const  NewExpensesComponent =(props) => {
   return (
     <Card className="expenses">
       {props.data.map((expense) => (
