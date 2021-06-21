@@ -1,9 +1,11 @@
 import "./NewExpensesComponent.css";
 import ExpenseItem from "./ExpenseItem";
+import Card from "./Card";
+
 
 function NewExpensesComponent(props) {
   return (
-    <div className="expenses">
+    <Card className="expenses">
       {props.data.map((expense) => (
         <ExpenseItem
           title={expense.title}
@@ -11,7 +13,8 @@ function NewExpensesComponent(props) {
           date={expense.date}
         />
       ))}
-      ;
+      
+      
       {/*  <ExpenseItem
         title={props.data[1].title}
         amount={props.data[1].amount}
@@ -27,7 +30,7 @@ function NewExpensesComponent(props) {
         amount={props.data[3].amount}
         date={props.data[3].date}
       /> */}
-    </div>
+    </Card>
   );
 }
 
