@@ -22,10 +22,14 @@ const App =()=> {
       date: new Date(2021, 5, 12),
     },
   ];
+  const saveExpenseDataFromNewExpense = (dataPassedThroughNewExpense)=>{
+    
+    console.log(dataPassedThroughNewExpense);
+  }
 
   return (
     <div>
-    <NewExpense></NewExpense>
+    <NewExpense onSaveDataHandlerFromNewExpense={saveExpenseDataFromNewExpense}/>
       <Expenses data={expenses}/>
     </div>
   );
