@@ -35,7 +35,7 @@ const App =()=> {
      
   }
 
-  console.log(newitems);
+  
   
 
   return (
