@@ -30,7 +30,7 @@ const App =()=> {
 
   const saveExpenseDataFromNewExpense = (dataPassedThroughNewExpense)=>{
     
-    setNewItem((prewExpenses)=>[dataPassedThroughNewExpense,...prewExpenses]);
+    setNewItem((prewExpenses)=>  [dataPassedThroughNewExpense,...prewExpenses]);
      
      
   }

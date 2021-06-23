@@ -6,8 +6,9 @@ import React, { useState } from "react";
 import ExpensesList from "./ExpensesList";
 
 const Expenses = (props) => {
-  const [Data, changeData] = useState("2019");
 
+  let [Data, changeData] = useState("2019");
+  
   const getDataSelected = (dataSelected) => {
     changeData(dataSelected);
   };

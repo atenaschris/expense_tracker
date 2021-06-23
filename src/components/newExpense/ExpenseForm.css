@@ -5,6 +5,11 @@
     margin-bottom: 1rem;
     text-align: left;
   }
+
+  .new-expense-error{
+    color: red;
+    
+  }
   
   .new-expense__control label {
     font-weight: bold;
