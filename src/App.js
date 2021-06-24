@@ -1,7 +1,7 @@
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/newExpense/NewExpense";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 const DUMMY_EXPENSES = [
   {
     id: "e1",
@@ -22,28 +22,30 @@ const DUMMY_EXPENSES = [
     amount: 450,
     date: new Date(2021, 5, 12),
   },
+  {
+    id: "e5",
+    title: "New Desk 2019",
+    amount: 450,
+    date: new Date(2019, 5, 12),
+  },
 ];
-const App =()=> {
-  const[newitems,setNewItem] = useState(
-    DUMMY_EXPENSES
-  );
+const App = () => {
+  const [newitems, setNewItem] = useState(DUMMY_EXPENSES);
 
-  const saveExpenseDataFromNewExpense = (dataPassedThroughNewExpense)=>{
-    
-    setNewItem((prewExpenses)=>  [dataPassedThroughNewExpense,...prewExpenses]);
-     
-     
-  }
-
-  
-  
+  const saveExpenseDataFromNewExpense = (dataPassedThroughNewExpense) => {
+    setNewItem((prewExpenses) => {
+      return [dataPassedThroughNewExpense, ...prewExpenses];
+    });
+  };
 
   return (
     <div>
-    <NewExpense onSaveDataHandlerFromNewExpense={saveExpenseDataFromNewExpense}/>
-      <Expenses data={newitems}/>
+      <NewExpense
+        onSaveDataHandlerFromNewExpense={saveExpenseDataFromNewExpense}
+      />
+      <Expenses data={newitems} />
     </div>
   );
-}
+};
 
 export default App;

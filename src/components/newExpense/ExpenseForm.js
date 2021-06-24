@@ -39,52 +39,51 @@ const ExpenseForm = (props) => {
       enteredDate: event.target.value,
     }); */
   /* setUserInput((prevState)=>{return {...prevState,enteredDate:event.target.value} }) */
-    let[errorMessage,setErrorMessage] = useState('');
+  let [errorMessage, setErrorMessage] = useState("");
   let [isOpened, changeIsOpened] = useState(false);
   const submitHandler = (event) => {
     event.preventDefault();
-    function isInputValid(enteredTitle,enteredAmount,enteredDate) {
-      if (enteredTitle == '' || enteredAmount == '' || enteredDate == '') 
+    function isInputValid(enteredTitle, enteredAmount, enteredDate) {
+      if (enteredTitle === "" || enteredAmount === "" || enteredDate === "")
         return false;
-      
+
       return true;
-      
     }
-     const isInputValidd = isInputValid(enteredTitle,enteredAmount,enteredDate);
-     setErrorMessage('Please, make sure you fill all the forms before submitting the form!!!');
+    setErrorMessage(
+      "Please, make sure you fill all the forms before submitting the form!!!"
+    );
+    const isInputValidd = isInputValid(
+      enteredTitle,
+      enteredAmount,
+      enteredDate
+    );
+    
     if (isInputValidd) {
-      
       const expenseData = {
         title: enteredTitle,
-        amount: enteredAmount,
+        amount: +enteredAmount,
         date: new Date(enteredDate),
       };
+      
       props.onSaveExpenseData(expenseData);
       setEnteredtitle("");
       setEnteredAmount("");
       setEnteredDate("");
       changeIsOpened(!isOpened);
-      setErrorMessage('');
-     
-    } 
-    
-    
+      setErrorMessage("");
+    }
    
-   
-
-
   };
   const changeIsOpededHandler = () => {
     changeIsOpened(!isOpened);
-    setErrorMessage('');
+    setErrorMessage("");
   };
 
   return (
     <div>
-      {<p className="new-expense-error"> {errorMessage}</p>} 
-      
+      {<p className="new-expense-error"> {errorMessage}</p>}
+
       {isOpened && (
-       
         <form onSubmit={submitHandler}>
           <div className="new-expense__controls">
             <div className="new-expense__control">
@@ -92,7 +91,7 @@ const ExpenseForm = (props) => {
               <input
                 value={enteredTitle}
                 type="text"
-                onChange={titleChangeHandler} 
+                onChange={titleChangeHandler}
               />
             </div>
             <div className="new-expense__control">
@@ -103,7 +102,6 @@ const ExpenseForm = (props) => {
                 min="0.01"
                 step="0.01"
                 onChange={amountChangeHandler}
-              
               />
             </div>
             <div className="new-expense__control">
@@ -114,7 +112,6 @@ const ExpenseForm = (props) => {
                 min="2019-01-01"
                 max="2022-12-31"
                 onChange={dateChangeHandler}
-                
               />
             </div>
           </div>
@@ -122,29 +119,13 @@ const ExpenseForm = (props) => {
             <button onClick={changeIsOpededHandler}>Close</button>
             <button type="submit">Add Expenses</button>
           </div>
-         
-          
         </form>
-        
       )}
-      {!isOpened && <button onClick={changeIsOpededHandler} >Add New Expense</button> }
-    
+      {!isOpened && (
+        <button onClick={changeIsOpededHandler}>Add New Expense</button>
+      )}
     </div>
   );
-
-  /*  if (isOpened) {
-    return (
-    
-    );
-  }
-
-  return(
-    <div>
-      
-      
-      
-    </div>
-  ) */
 };
 
 export default ExpenseForm;
