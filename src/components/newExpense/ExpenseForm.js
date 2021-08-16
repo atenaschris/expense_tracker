@@ -1,123 +1,100 @@
 import React, { useState } from "react";
+import useInput from "../../hooks/use-input";
 
 import "./ExpenseForm.css";
 const ExpenseForm = (props) => {
-  const [enteredTitle, setEnteredtitle] = useState("");
 
-  const [enteredAmount, setEnteredAmount] = useState("");
 
-  const [enteredDate, setEnteredDate] = useState("");
-
-  /* const [userInput, setUserInput] = useState({
-    enteredTitle: "",
-    enteredAmount: "",
-    enteredDate: "",
-  }); */
-
-  const titleChangeHandler = (event) => setEnteredtitle(event.target.value);
-
-  /*  setUserInput({
-      ...userInput,
-      enteredTitle: event.target.value,
-    }); */
-
-  /* setUserInput((prevState)=>{return {...prevState,enteredTitle:event.target.value}}) */
-
-  const amountChangeHandler = (event) => setEnteredAmount(event.target.value);
-
-  /* setUserInput({
-      ...userInput,
-      enteredAmount: event.target.value,
-    }); */
-
-  /* setUserInput((prevState)=>{return {...prevState,enteredAmount: event.target.value}}) */
-
-  const dateChangeHandler = (event) => setEnteredDate(event.target.value);
-
-  /* setUserInput({
-      ...userInput,
-      enteredDate: event.target.value,
-    }); */
-  /* setUserInput((prevState)=>{return {...prevState,enteredDate:event.target.value} }) */
-  let [errorMessage, setErrorMessage] = useState("");
+ 
   let [isOpened, changeIsOpened] = useState(false);
+
+  const validateTitleInput = value =>{
+    return value.trim() !== '' && value.trim().length < 30;
+  }
+  const validateAmountInput = value =>{
+    return value.trim() !== '' && value.trim().length < 30;
+  }
+
+  const validateDateInput = value =>{
+    return  value.trim() !== ''
+  }
+
+   const {value : titleValue, error:titleHasError,isValid:titleIsValid,changeInputHandler:changeTitleInputHandler,blurInputHandler:blurTitleInputHandler,resetInput:resetInputTitle} =  useInput((value)=>validateTitleInput(value));
+
+   const {value : amountValue, error:amountHasError,isValid:amountIsValid,changeInputHandler:changeAmountInputHandler,blurInputHandler:blurAmountInputHandler,resetInput:resetInputAmount} =  useInput((value)=>validateAmountInput(value));
+
+   const {value : dateValue, error:dateHasError,isValid:dateIsValid,changeInputHandler:changeDateInputHandler,blurInputHandler:blurDateInputHandler,resetInput:resetInputDate} =  useInput((value)=>validateDateInput(value));
+
+
   const submitHandler = (event) => {
     event.preventDefault();
-    function isInputValid(enteredTitle, enteredAmount, enteredDate) {
-      if (enteredTitle === "" || enteredAmount === "" || enteredDate === "")
-        return false;
-
-      return true;
-    }
-    setErrorMessage(
-      "Please, make sure you fill all the forms before submitting the form!!!"
-    );
-    const isInputValidd = isInputValid(
-      enteredTitle,
-      enteredAmount,
-      enteredDate
-    );
-    
-    if (isInputValidd) {
-      const expenseData = {
-        title: enteredTitle,
-        amount: +enteredAmount,
-        date: new Date(enteredDate),
-      };
-      
-      props.onSaveExpenseData(expenseData);
-      setEnteredtitle("");
-      setEnteredAmount("");
-      setEnteredDate("");
-      changeIsOpened(!isOpened);
-      setErrorMessage("");
-    }
    
+      const expenseData = {
+        title: titleValue,
+        amount: +amountValue,
+        date: new Date(dateValue),
+      };      
+      props.onSaveExpenseData(expenseData);
+      resetInputTitle();
+      resetInputAmount();
+      resetInputDate();
+      changeIsOpened(prevState=>!prevState);
+
   };
   const changeIsOpededHandler = () => {
-    changeIsOpened(!isOpened);
-    setErrorMessage("");
+    changeIsOpened(prevState=>!prevState);
+  
   };
+
+  let formIsValid = false;
+
+  if (titleIsValid && amountIsValid && dateIsValid) {
+    formIsValid = true;
+  }
 
   return (
     <div>
-      {<p className="new-expense-error"> {errorMessage}</p>}
-
       {isOpened && (
         <form onSubmit={submitHandler}>
           <div className="new-expense__controls">
             <div className="new-expense__control">
               <label>Title</label>
               <input
-                value={enteredTitle}
                 type="text"
-                onChange={titleChangeHandler}
+                value={titleValue}
+                onChange={changeTitleInputHandler}
+                onBlur={blurTitleInputHandler}
               />
             </div>
+            {titleHasError && <p className="error">Please enter a valid value</p>}
             <div className="new-expense__control">
               <label>Amount</label>
               <input
-                value={enteredAmount}
                 type="number"
                 min="0.01"
                 step="0.01"
-                onChange={amountChangeHandler}
+                value={amountValue}
+                onChange={changeAmountInputHandler}
+                onBlur={blurAmountInputHandler}
               />
             </div>
+            {amountHasError && <p className="error">Please enter a valid value</p>}
             <div className="new-expense__control">
               <label>Date</label>
               <input
-                value={enteredDate}
                 type="date"
+                value={dateValue}
+                onChange={changeDateInputHandler}
+                onBlur={blurDateInputHandler}
                 min="2019-01-01"
                 max="2022-12-31"
-                onChange={dateChangeHandler}
               />
             </div>
+            {dateHasError && <p className="error">Please enter a valid value</p>}
           </div>
           <div className="new-expense__actions">
-            <button onClick={changeIsOpededHandler}>Close</button>
-            <button type="submit">Add Expenses</button>
+            <button   onClick={changeIsOpededHandler}>Close</button>
+            <button disabled={!formIsValid} type="submit">Add Expenses</button>
           </div>
         </form>
       )}

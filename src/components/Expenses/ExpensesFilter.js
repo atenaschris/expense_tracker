@@ -1,25 +1,10 @@
 
-
 import './ExpensesFilter.css';
 
-const ExpensesFilter = (props) => {
-
-     
-    
-    const setDataValue = event =>{
-     
-      
-      props.dataSelectedHandler(event.target.value);
-
-
-    }
-    
-    
-    
-
-    
-    
-
+const ExpensesFilter = (props) => { 
+  const setDataValue = event =>{
+    props.dataSelectedHandler(event.target.value);
+  }
   return (
     <div className='expenses-filter'>
       <div className='expenses-filter__control'>

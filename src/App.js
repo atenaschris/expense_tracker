@@ -30,8 +30,8 @@ const DUMMY_EXPENSES = [
   },
 ];
 const App = () => {
-  const [newitems, setNewItem] = useState(DUMMY_EXPENSES);
 
+  const [newitems, setNewItem] = useState(DUMMY_EXPENSES);
   const saveExpenseDataFromNewExpense = (dataPassedThroughNewExpense) => {
     setNewItem((prewExpenses) => {
       return [dataPassedThroughNewExpense, ...prewExpenses];
@@ -39,12 +39,12 @@ const App = () => {
   };
 
   return (
-    <div>
+    <>
       <NewExpense
         onSaveDataHandlerFromNewExpense={saveExpenseDataFromNewExpense}
       />
       <Expenses data={newitems} />
-    </div>
+    </>
   );
 };
 
