@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     flex-direction: column;
     margin-bottom: 1rem;
-    text-align: left;
+    text-align: center;
   }
 
   .new-expense-error{
@@ -22,8 +22,10 @@
     padding: 0.5rem;
     border-radius: 6px;
     border: 1px solid #ccc;
-    width: 20rem;
-    max-width: 100%;
+    width: 90%;
+    max-width: 40rem;
+    margin-bottom: 0.5rem;
+   
   }
   
   .new-expense__actions {
