@@ -1,12 +1,14 @@
 import { useState } from "react";
 
+import { useCallback } from "react";
+
 
 const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(undefined);
   const [didSubmit, setDidSubmit] = useState(false);
 
-  const fetchData = async (requestConfig, applyData) => {
+  const fetchData = useCallback(async (requestConfig, applyData) => {
     setIsLoading(true);
     setError(undefined);
     setDidSubmit(false);
@@ -31,7 +33,7 @@ const useHttp = () => {
 
     setIsLoading(false);
     setDidSubmit(true);
-  };
+  },[]);
 
   return {
     isLoading,

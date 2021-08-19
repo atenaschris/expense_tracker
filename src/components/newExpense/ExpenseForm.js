@@ -52,11 +52,14 @@ const ExpenseForm = (props) => {
     }
 
     const expenseData = {
+      id:Math.random().toString(),
       title: titleValue,
       amount: +amountValue,
-      date: new Date(dateValue),
+      date: dateValue,
     };
+
     props.onSaveExpenseData(expenseData);
+
     resetInputTitle();
     resetInputAmount();
     resetInputDate();
