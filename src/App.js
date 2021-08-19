@@ -1,7 +1,9 @@
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/newExpense/NewExpense";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import useHttp from './hooks/use-http';
+
 const DUMMY_EXPENSES = [
   {
     id: "e1",
@@ -29,21 +31,55 @@ const DUMMY_EXPENSES = [
     date: new Date(2019, 5, 12),
   },
 ];
+
 const App = () => {
 
-  const [newitems, setNewItem] = useState(DUMMY_EXPENSES);
-  const saveExpenseDataFromNewExpense = (dataPassedThroughNewExpense) => {
+   const {isLoading,error,didSubmit, fetchData: fetchExpenses} = useHttp();
+
+   const [expenses,setExpenses] = useState([]);
+
+  useEffect(()=>{
+
+    const transfomrData = data =>{
+
+      console.log(data);
+      const expensesData = [];
+
+      for (const key in data) {
+       expensesData.push({
+         id:key,
+         ...data[key],
+       })
+
+      }
+
+     const formattedExpenses =  expensesData.map((el)=>{
+        return {...el,date: new Date(el.date)}
+      });
+
+      console.log(formattedExpenses);
+
+      setExpenses(formattedExpenses);
+
+      console.log(expensesData);
+
+    }
+
+    fetchExpenses({url:'https://react-expenses-tracker-default-rtdb.firebaseio.com/expenses.jsonnnn'},transfomrData);
+
+  },[])
+  /*  const saveExpenseDataFromNewExpense = (dataPassedThroughNewExpense) => {
     setNewItem((prewExpenses) => {
       return [dataPassedThroughNewExpense, ...prewExpenses];
     });
-  };
+  }; */
 
   return (
     <>
       <NewExpense
-        onSaveDataHandlerFromNewExpense={saveExpenseDataFromNewExpense}
+      /*   onSaveDataHandlerFromNewExpense={saveExpenseDataFromNewExpense} */
       />
-      <Expenses data={newitems} />
+      {<Expenses isLoading={isLoading} error={error} didSubmit={didSubmit} data={expenses} />}
     </>
   );
 };

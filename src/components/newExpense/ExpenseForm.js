@@ -3,6 +3,7 @@ import useInput from "../../hooks/use-input";
 
 import "./ExpenseForm.css";
 const ExpenseForm = (props) => {
+
   let [isOpened, changeIsOpened] = useState(false);
 
   const validateTitleInput = (value) => {
@@ -45,6 +46,10 @@ const ExpenseForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+
+    if (!formIsValid) {
+      return;
+    }
 
     const expenseData = {
       title: titleValue,
