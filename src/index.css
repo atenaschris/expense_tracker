@@ -13,3 +13,12 @@ body {
   background-color: #3f3f3f;
 }
 
+.loading-spinner-centered{
+  text-align: center;
+}
+
+.error-centered {
+  text-align: center;
+  color: white;
+}
+

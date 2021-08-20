@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import useInput from "../../hooks/use-input";
 
-import "./ExpenseForm.css";
-const ExpenseForm = (props) => {
+import classes from './ExpenseForm.module.css';
 
+const ExpenseForm = (props) => {
   let [isOpened, changeIsOpened] = useState(false);
 
   const validateTitleInput = (value) => {
     return value.trim() !== "" && value.trim().length < 30;
   };
+
   const validateAmountInput = (value) => {
-    return value.trim() !== "" && value.trim().length < 30;
+    return value.trim() !== "" && value.trim().length < 6;
   };
 
   const validateDateInput = (value) => {
@@ -52,7 +53,7 @@ const ExpenseForm = (props) => {
     }
 
     const expenseData = {
-      id:Math.random().toString(),
+      id: Math.random().toString(),
       title: titleValue,
       amount: +amountValue,
       date: dateValue,
@@ -76,11 +77,11 @@ const ExpenseForm = (props) => {
   }
 
   return (
-    <div>
+    <>
       {isOpened && (
         <form onSubmit={submitHandler}>
-          <div className="new-expense__controls">
-            <div className="new-expense__control">
+          <div className={classes['new-expense__controls']}>
+            <div className={classes['new-expense__control']}>
               <label>Title</label>
               <input
                 type="text"
@@ -90,12 +91,12 @@ const ExpenseForm = (props) => {
               />
             </div>
             {titleHasError && (
-              <p className="error">
+              <p className={classes.error}>
                 Cannot enter neither an empty value nor a value less than 30
                 chars
               </p>
             )}
-            <div className="new-expense__control">
+            <div className={classes['new-expense__control']}>
               <label>Amount</label>
               <input
                 type="number"
@@ -107,12 +108,11 @@ const ExpenseForm = (props) => {
               />
             </div>
             {amountHasError && (
-              <p className="error">
-                Cannot enter neither an empty value nor a value less than 30
-                chars
+              <p className={classes.error}>
+                The value shouldn't be empty and should be a number 
               </p>
             )}
-            <div className="new-expense__control">
+            <div className={classes['new-expense__control']}>
               <label>Date</label>
               <input
                 type="date"
@@ -124,10 +124,10 @@ const ExpenseForm = (props) => {
               />
             </div>
             {dateHasError && (
-              <p className="error">Cannot enter an empty value</p>
+              <p className={classes.error}>Cannot enter an empty value</p>
             )}
           </div>
-          <div className="new-expense__actions">
+          <div className={classes['new-expense__actions']}>
             <button onClick={changeIsOpededHandler}>Close</button>
             <button disabled={!formIsValid} type="submit">
               Add Expenses
@@ -138,7 +138,7 @@ const ExpenseForm = (props) => {
       {!isOpened && (
         <button onClick={changeIsOpededHandler}>Add New Expense</button>
       )}
-    </div>
+    </>
   );
 };
 

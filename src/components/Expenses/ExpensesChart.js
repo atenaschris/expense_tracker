@@ -2,6 +2,8 @@ import React from 'react';
 
 import Chart from '../Chart/Chart';
 
+import classes from './ExpensesChart.module.css';
+
 const ExpensesChart = props => {
 
     const chartDataPoints = [
@@ -26,7 +28,7 @@ const ExpensesChart = props => {
     
 
     return (
-        <div>
+        <div className={classes['margin-bottom']}>
             <Chart dataPoints={chartDataPoints}/>
         </div>
     )

@@ -1,0 +1,35 @@
+.new-expense__controls {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.new-expense__control label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.new-expense__control input {
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 90%;
+  max-width: 40rem;
+  margin-bottom: 0.5rem;
+}
+
+.new-expense__actions {
+  text-align: right;
+}
+.new-expense__actions button:disabled {
+  cursor: not-allowed;
+  background-color: rgb(100, 59, 119);
+}
+
+.error {
+  color: red;
+}

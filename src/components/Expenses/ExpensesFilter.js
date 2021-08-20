@@ -1,13 +1,13 @@
 
-import './ExpensesFilter.css';
+import classes from './ExpensesFilter.module.css';
 
 const ExpensesFilter = (props) => { 
   const setDataValue = event =>{
     props.dataSelectedHandler(event.target.value);
   }
   return (
-    <div className='expenses-filter'>
-      <div className='expenses-filter__control'>
+    <div className={classes['expenses-filter']}>
+      <div className={classes['expenses-filter__control']}>
         <label>Filter by year</label>
         <select value={props.dataToShowDefault} onChange={setDataValue}>
           <option value="2022" >2022</option>
