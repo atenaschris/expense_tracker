@@ -5,6 +5,9 @@ import React, { useEffect, useState } from "react";
 import useHttp from "./hooks/use-http";
 
 const App = () => {
+
+  
+
   const {
     isLoading: getAllExpensesIsLoading,
     error: getAllExpensesError,

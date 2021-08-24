@@ -25,6 +25,18 @@
 .new-expense__actions {
   text-align: right;
 }
+
+@media screen and (max-width: 358px) {
+  .new-expense__actions {
+    text-align: center;
+  }
+
+  .new-expense__actions button:last-child {
+    margin-top: 0.5rem;
+  }
+
+}
+
 .new-expense__actions button:disabled {
   cursor: not-allowed;
   background-color: rgb(100, 59, 119);

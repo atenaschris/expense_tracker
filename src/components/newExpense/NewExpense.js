@@ -3,6 +3,7 @@ import useHttp from "../../hooks/use-http";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import classes from "./NewExpense.module.css";
 import ExpenseForm from "./ExpenseForm";
+import { SuccessMessage } from "../ui/SuccessMessage";
 
 const NewExpense = (props) => {
   const {
@@ -12,7 +13,7 @@ const NewExpense = (props) => {
     fetchData: sendExpenses,
   } = useHttp();
 
-  const [isMessageOpened,setIsMessageOpened] = useState(false);
+  const [isMessageOpened, setIsMessageOpened] = useState(false);
 
   const transformData = (enteredExpenseData, fetchedNewExpenseData) => {
     console.log(enteredExpenseData, fetchedNewExpenseData);
@@ -43,9 +44,9 @@ const NewExpense = (props) => {
     );
   };
 
-  const closeMessageHandler = ()=>{
+  const closeMessageHandler = () => {
     setIsMessageOpened(true);
-  }
+  };
 
   let content;
 
@@ -62,12 +63,7 @@ const NewExpense = (props) => {
   }
 
   if (!sendExpensesError && sendExpensesDidSubmit && !isMessageOpened) {
-    content = (
-      <div className={classes['error-control']}>
-        <p className="error-centered">Request sent successfully!!</p>
-        <button onClick={closeMessageHandler} className={classes.alternative}>x</button>
-      </div>
-    );
+    content = <SuccessMessage onClosingMessageHandler={closeMessageHandler} />;
   }
 
   return (
