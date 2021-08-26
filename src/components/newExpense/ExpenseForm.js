@@ -92,7 +92,7 @@ const ExpenseForm = (props) => {
             </div>
             {titleHasError && (
               <p className={classes.error}>
-                Cannot enter neither an empty value nor a value less than 30
+                Cannot enter neither an empty value nor a value greather than 30
                 chars
               </p>
             )}
